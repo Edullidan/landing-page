@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
+  const [search, setSearch] = useState("");
+  const [repositories, setRepositories] = useState([]);
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const response = await fetch(
+      `https://api.github.com/search/repositories?q=${search}`
+    );
+    const data = await response.json();
+    setRepositories(data.items);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Github Repository Search</h1>
+      <form onSubmit={handleSearch}>
+        <input
+          type='text'
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <button type='submit'>Search</button>
+      </form>
+      <ul>
+        {repositories.map((repo) => (
+          <li key={repo.id}>{repo.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }
