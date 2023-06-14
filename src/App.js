@@ -5,6 +5,7 @@ import Repo from "./components/Repo";
 
 function App() {
   const [repositories, setRepositories] = useState([]);
+  const [repository, setRepository] = useState(null);
 
   return (
     <Routes>
@@ -17,7 +18,10 @@ function App() {
           />
         }
       ></Route>
-      <Route path='/repo/:id' element={<Repo />}></Route>
+      <Route
+        path='/repo/:id'
+        element={<Repo repository={repository} setRepository={setRepository} />}
+      ></Route>
     </Routes>
   );
 }
