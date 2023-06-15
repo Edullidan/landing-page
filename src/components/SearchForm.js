@@ -28,7 +28,7 @@ function SearchForm({ repositories, setRepositories }) {
       <ul>
         {repositories.map((repo) => (
           <li key={repo.id}>
-            <Link to={repo.html_url} target='_blank'>
+            <Link to={`/repo/${repo.id}`} target='_blank'>
               {repo.name}
             </Link>
           </li>

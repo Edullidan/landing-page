@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-function Repo() {
+function Repo({ repository, setRepository }) {
   const { id } = useParams();
-  const [repository, setRepository] = useState(null);
 
   useEffect(() => {
     const fetchRepository = async () => {
@@ -13,7 +12,7 @@ function Repo() {
     };
 
     fetchRepository();
-  }, [id]);
+  }, [id, setRepository]);
 
   if (!repository) {
     return <div>Loading...</div>;
