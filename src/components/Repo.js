@@ -22,7 +22,7 @@ function Repo() {
   return (
     <div>
       <h2>Repository Details</h2>
-      <p>Repository ID: {id}</p>
+      <p>Repository ID: {repository.id}</p>
       <p>Repository Name: {repository.name}</p>
       <p>Repository Description: {repository.description}</p>
     </div>

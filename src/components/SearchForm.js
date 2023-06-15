@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function SearchForm({ repositories, setRepositories }) {
   const [search, setSearch] = useState("");
-  const navigate = useNavigate();
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -13,10 +12,6 @@ function SearchForm({ repositories, setRepositories }) {
     const data = await response.json();
     console.log(data);
     setRepositories(data.items);
-  };
-
-  const handleRepoClick = (repo) => {
-    navigate(`/repository/${repo.id}`);
   };
 
   return (
@@ -32,8 +27,10 @@ function SearchForm({ repositories, setRepositories }) {
       </form>
       <ul>
         {repositories.map((repo) => (
-          <li key={repo.id} onClick={() => handleRepoClick(repo)}>
-            <Link to={`/repository/${repo.id}`}>{repo.name}</Link>
+          <li key={repo.id}>
+            <Link to={repo.html_url} target='_blank'>
+              {repo.name}
+            </Link>
           </li>
         ))}
       </ul>
